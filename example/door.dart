@@ -24,28 +24,28 @@ class Door extends Disposable {
   Door() {
     _machine = StateMachine('door');
     manageDisposable(_machine);
-    isClosed = _machine.newState('closed');
-    isLocked = _machine.newState('locked');
-    isOpen = _machine.newState('open');
+    isClosed = _machine!.newState('closed');
+    isLocked = _machine!.newState('locked');
+    isOpen = _machine!.newState('open');
 
-    close = _machine.newStateTransition('close', [isOpen], isClosed);
-    lock = _machine.newStateTransition('lock', [isClosed], isLocked);
-    open = _machine.newStateTransition('open', [isClosed], isOpen);
-    unlock = _machine.newStateTransition('unlock', [isLocked], isClosed);
+    close = _machine!.newStateTransition('close', [isOpen], isClosed);
+    lock = _machine!.newStateTransition('lock', [isClosed], isLocked);
+    open = _machine!.newStateTransition('open', [isClosed], isOpen);
+    unlock = _machine!.newStateTransition('unlock', [isLocked], isClosed);
 
-    _machine.start(isOpen);
+    _machine!.start(isOpen);
   }
 
-  State isClosed;
-  State isLocked;
-  State isOpen;
+  State? isClosed;
+  State? isLocked;
+  State? isOpen;
 
-  StateTransition close;
-  StateTransition lock;
-  StateTransition open;
-  StateTransition unlock;
+  StateTransition? close;
+  StateTransition? lock;
+  StateTransition? open;
+  StateTransition? unlock;
 
-  StateMachine _machine;
+  StateMachine? _machine;
 
   @override
   String toString() => _machine.toString();
